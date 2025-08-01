@@ -7,6 +7,7 @@ import gsap from 'gsap';
 const Navbar = () => {
     const navRef = useRef(null);
     const [isDocked, setIsDocked] = useState(false);
+    
 
     useEffect(() => {
         const handleScroll = () => {
@@ -40,25 +41,35 @@ const Navbar = () => {
     });
 
     useEffect(() => {
+        const mm = gsap.matchMedia();
         const navbar = navRef.current;
 
+         mm.add(
+      {
+        // Define media queries
+        isMobile: "(max-width: 768px)",
+        isDesktop: "(min-width: 769px)",
+      },
+      (context) => {
+        const { isMobile, isDesktop } = context.conditions;
+
         if (isDocked) {
-        // Animate to floating dock
-        gsap.to(navbar, {
-            borderRadius: "21px",
-            width: "92.5%",
-            top: "10px",
-            left: "50px",
-            right: "50px",
+          // Floating dock animation
+          gsap.to(navbar, {
+            borderRadius: isMobile ? "15px" : "21px",
+            width: isMobile ? "95%" : "92.5%",
+            top: isMobile ? "5px" : "10px",
+            left: isMobile ? "10px" : "50px",
+            right: isMobile ? "10px" : "50px",
             position: "fixed",
             duration: 0.6,
             ease: "power3.out",
-            backdropFilter: 'blur(30px)',
+            backdropFilter: isMobile ? "blur(20px)" : "blur(30px)",
             backgroundColor: "#45464550",
-        });
+          });
         } else {
-        // Animate back to full navbar
-        gsap.to(navbar, {
+          // Full navbar animation
+          gsap.to(navbar, {
             backgroundColor: "transparent",
             width: "100%",
             borderRadius: "0px",
@@ -67,10 +78,13 @@ const Navbar = () => {
             position: "fixed",
             duration: 0.6,
             ease: "power3.out",
-        });
+          });
         }
-    }, [isDocked]);
+      }
+    );
 
+    return () => mm.revert(); // Cleanup matchMedia when component unmounts
+  }, [isDocked]);
     
 
 
