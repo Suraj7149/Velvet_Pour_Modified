@@ -54,7 +54,7 @@ const Navbar = () => {
             duration: 0.6,
             ease: "power3.out",
             backdropFilter: 'blur(30px)',
-            backgroundColor: "#214d2650",
+            backgroundColor: "#45464550",
         });
         } else {
         // Animate back to full navbar
