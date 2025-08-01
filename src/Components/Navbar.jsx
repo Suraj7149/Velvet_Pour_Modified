@@ -53,8 +53,8 @@ const Navbar = () => {
             position: "fixed",
             duration: 0.6,
             ease: "power3.out",
-            backgroundFilter: 'blur(50px)',
-            // backgroundColor: "#214d2650",
+            backdropFilter: 'blur(30px)',
+            backgroundColor: "#214d2650",
         });
         } else {
         // Animate back to full navbar

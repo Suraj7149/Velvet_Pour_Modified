@@ -76,7 +76,7 @@ body {
         }
 
         a {
-            @apply cursor-pointer text-nowrap md:text-base text-sm;
+            @apply md:px-5 cursor-pointer text-nowrap md:text-base text-sm;
         }
 
         ul {
